@@ -56,6 +56,29 @@ public class Rygel.LogHandler : GLib.Object {
     private LogHandler () {
         this.log_level_hash = new HashMap<string,LogLevelFlags> ();
 
+        string[] argv = { "/usr/bin/logger", "-t", "rygel" };
+        int logger_fd;
+
+        try {
+            GLib.Process.spawn_async_with_pipes (null,          // working_directory
+                                                 argv,
+                                                 null,          // envp
+                                                 SpawnFlags.STDOUT_TO_DEV_NULL |
+                                                 SpawnFlags.STDERR_TO_DEV_NULL,
+                                                 null,         // child_setup
+                                                 null,         // child_pid
+                                                 out logger_fd, // standard_input
+                                                 null,          // standard_output
+                                                 null);         // standard_error
+
+            Posix.dup2 (logger_fd, Posix.STDOUT_FILENO);
+            Posix.dup2 (logger_fd, Posix.STDERR_FILENO);
+            Posix.close (logger_fd);
+        } catch (Error err) {
+            warning (_("Unable to send output to /usr/bin/logger: %s"),
+                     err.message);
+        }
+
         // Get the allowed log levels from the config
         var config = MetaConfig.get_default ();
         string log_levels;

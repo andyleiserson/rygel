@@ -47,6 +47,7 @@ public class Rygel.Playbin.Player : GLib.Object, Rygel.MediaPlayer {
                                         "audio/x-wav",
                                         "audio/x-ac3",
                                         "audio/x-m4a",
+                                        "audio/mp4",
                                         "audio/L16;rate=44100;channels=2",
                                         "audio/L16;rate=44100;channels=1",
                                         "audio/L16;channels=2;rate=44100",

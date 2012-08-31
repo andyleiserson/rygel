@@ -27,7 +27,7 @@ using Rygel;
 internal class Rygel.RenderingControl : Service {
     public const string UPNP_ID = "urn:upnp-org:serviceId:RenderingControl";
     public const string UPNP_TYPE =
-                    "urn:schemas-upnp-org:service:RenderingControl:2";
+                    "urn:schemas-upnp-org:service:RenderingControl:1";
     public const string DESCRIPTION_PATH = "xml/RenderingControl2.xml";
     public const string LAST_CHANGE_NS =
                     "urn:schemas-upnp-org:metadata-1-0/RCS/";

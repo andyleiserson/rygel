@@ -26,4 +26,5 @@ LIBRYGEL_CORE_VALAFLAGS_PKG = \
 	--pkg gstreamer-0.10 \
 	--pkg gstreamer-base-0.10 \
 	--pkg gupnp-dlna-1.0 \
+	--pkg posix \
 	--pkg uuid

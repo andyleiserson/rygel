@@ -31,7 +31,7 @@ using GUPnP;
 public class Rygel.ConnectionManager : Service {
     public const string UPNP_ID = "urn:upnp-org:serviceId:ConnectionManager";
     public const string UPNP_TYPE =
-                    "urn:schemas-upnp-org:service:ConnectionManager:2";
+                    "urn:schemas-upnp-org:service:ConnectionManager:1";
     public const string DESCRIPTION_PATH = "xml/ConnectionManager.xml";
 
     protected string sink_protocol_info;

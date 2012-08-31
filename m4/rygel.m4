@@ -99,6 +99,25 @@ AC_DEFUN([RYGEL_CHECK_VALA],
           [dnl check for vala
            AM_PROG_VALAC([$1])
 
+            dnl See where we should look for vapi files. If it's under
+            dnl $datadir, then assume it's one of the standard locations where
+            dnl vala will look. Otherwise, specify explicitly.
+            dnl
+            dnl Note the distinction between these directories (where we look
+            dnl for APIs when we do vala builds) and VAPIDIR, which is where we
+            dnl install our own vapi files.
+
+            for var in vapidir vapidir_versioned; do
+                AS_IF([dir=`$PKG_CONFIG --variable=$var vapigen`],
+                    [
+                        AC_MSG_NOTICE([got $var=$dir from pkg-config])
+                        AS_IF([expr "$dir" : "${datadir}"],
+                            [],
+                            [RYGEL_ADD_VALAFLAGS([--vapidir $dir])])
+                    ],
+                    [AC_MSG_NOTICE([pkg-config didn't return a value for $var, relying on valac built-in defaults])])
+            done
+
             AS_IF([test x$VALAC = "x"],
                 [AC_MSG_ERROR([Cannot find the "valac" compiler in your PATH])],
                 [
